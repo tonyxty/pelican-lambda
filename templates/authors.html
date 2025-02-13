@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}All Posts{% endblock %}
+
+{% block extra_head %}
+  <script src="{{ SITEURL }}/theme/accordion.js" defer></script>
+{% endblock %}
+
+{% block nav_path %}/{% endblock %}
+{% block nav_command %}ls -a{% endblock %}
+{% block page_title %}All Posts{% endblock %}
+
+{% block content %}
+  <div class="accordion">
+    {% from "component/article_accordion.html" import article_accordion %}
+    {% for author, articles in authors %}
+      {{ article_accordion(author, articles|sort(attribute='date', reverse=true), 'bg-gray-100', key=author.slug) }}
+    {% endfor %}
+  </div>
+{% endblock content %}

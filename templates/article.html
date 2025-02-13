@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title|striptags|e }}{% endblock %}
+{% block extra_head %}
+  <meta name="author" content="{{ article.author }}" />
+  {% set keywords = [article.category] + article.tags %}
+  <meta name="keywords" content="{{ keywords|join(',') }}" />
+{% endblock %}
+{% block nav_path %}
+  /
+  <a href="{{ SITEURL }}/{{ CATEGORIES_URL }}#{{ article.category }}">
+    {{ article.category }}
+  </a>
+  /{{ article.slug }}
+{% endblock %}
+{% block page_title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+  <div class="post">{{ article.content }}</div>
+{% endblock content %}
+
+{% block sidebar %}
+  <div class="sidebar">
+    <section>
+      <header>category</header>
+      {% from "component/badge.html" import category_badge %}
+      {{ category_badge(article.category, SITE) }}
+    </section>
+    <section>
+      <header>tags</header>
+      {% from "component/badge.html" import tag_badge %}
+      {% for tag in article.tags %}
+        {{ tag_badge(tag, SITE) }}
+      {% endfor %}
+    </section>
+    {% if article.series is defined %}
+      <section>
+        <header>series</header>
+        {% from "component/series.html" import series_index %}
+        {{ series_index(article.series, SITE) }}
+      </section>
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page.title|striptags|e }}{% endblock %}
+{% block extra_head %}
+  <meta name="author" content="{{ page.author }}" />
+  {% if page.tags is defined %}
+    <meta name="keywords" content="{{ page.tags|join(',') }}" />
+  {% endif %}
+{% endblock %}
+{% block nav_path %}{{ page.nav_path|d('/' if page.nav_command is defined else '/' ~ page.slug) }}{% endblock %}
+{% set nav_success = page.nav_success|d('true') == 'true' %}
+{% block nav_command %}{{ page.nav_command|d('') }}{% endblock %}
+{% block page_title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+  <div class="post">{{ page.content }}</div>
+{% endblock content %}

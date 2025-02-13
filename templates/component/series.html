@@ -1,0 +1,10 @@
+{% macro series_index(series, site) -%}
+  <h4>{{ series.name }}</h4>
+  <ol class="list-decimal">
+    {% for article in series.all %}
+      <li>
+        <a href="{{ site.site_url }}/{{ article.url }}">{{ article.title }}</a>
+      </li>
+    {% endfor %}
+  </ol>
+{%- endmacro %}

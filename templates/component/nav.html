@@ -1,0 +1,9 @@
+{% macro nav_button(url, display, active, site) -%}
+  <li>
+    <a href="{{ site.site_url }}/{{ url }}">
+      <div class="{{ 'bg-gray-400' if active else 'text-gray-700' }} p-2">
+        {{ display }}
+      </div>
+    </a>
+  </li>
+{%- endmacro %}

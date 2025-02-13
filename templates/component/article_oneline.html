@@ -1,0 +1,8 @@
+{% macro article_oneline(article) -%}
+  <div class="flex justify-between">
+    <div><a href="{{ article.url }}">{{ article.title }}</a></div>
+    <time datetime="{{ article.date.isoformat() }}">
+      {{ article.locale_date }}
+    </time>
+  </div>
+{%- endmacro %}

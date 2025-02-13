@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Roboto Serif", serif;
+  --font-sans: "Roboto", sans-serif;
+  --font-mono: "Roboto Mono", monospace;
+}
+
+@layer utilities {
+  .scrollbar-gutter-stable {
+    scrollbar-gutter: stable;
+  }
+}
+
+@layer base {
+  main a {
+    @apply text-blue-500 hover:underline;
+  }
+  button {
+    @apply hover:cursor-pointer;
+  }
+}
+
+@layer components {
+  .post {
+    h1 {
+      @apply my-4 text-6xl;
+    }
+    h2 {
+      @apply my-3 text-5xl;
+    }
+    h3 {
+      @apply my-3 text-4xl;
+    }
+    h4 {
+      @apply my-2 text-3xl;
+    }
+    h5 {
+      @apply my-2 text-2xl;
+    }
+    h6 {
+      @apply my-2 text-xl;
+    }
+    p {
+      @apply my-2 text-lg leading-8;
+    }
+    ul {
+      @apply list-inside list-disc;
+    }
+    ol {
+      @apply list-inside list-decimal;
+    }
+    li p {
+      @apply inline;
+    }
+    code {
+      @apply bg-gray-100 px-0.5 text-red-700;
+    }
+    blockquote {
+      @apply mx-12 my-4 bg-yellow-100 text-center font-serif;
+    }
+
+    .footnote * {
+      @apply text-sm;
+    }
+  }
+
+  .links {
+    a {
+      @apply text-blue-500 hover:underline;
+    }
+  }
+
+  .sidebar {
+    section {
+      @apply my-4;
+      & > header {
+        @apply mb-2 border-b-2 border-gray-200;
+      }
+    }
+  }
+
+  .accordion-toggle[aria-expanded="true"] .accordion-icon {
+    @apply after:content-[attr(data-expanded)];
+  }
+  .accordion-toggle[aria-expanded="false"] .accordion-icon {
+    @apply after:content-[attr(data-collapsed)];
+  }
+  .accordion-body {
+    @apply overflow-hidden transition-all duration-200 ease-in-out;
+  }
+}

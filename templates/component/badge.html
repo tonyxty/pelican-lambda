@@ -1,0 +1,17 @@
+{% macro category_badge(category, site) -%}
+  <a href="{{ site.site_url }}/{{ site.categories_url }}#{{ category.slug }}">
+    <span
+      class="mr-2 rounded-lg bg-green-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
+      {{ category }}
+    </span>
+  </a>
+{%- endmacro %}
+
+{% macro tag_badge(tag, site) -%}
+  <a href="{{ site.site_url }}/{{ site.tags_url }}#{{ tag.slug }}">
+    <span
+      class="mr-2 rounded-sm bg-gray-100 p-1 text-xs font-medium text-gray-800">
+      {{ tag }}
+    </span>
+  </a>
+{%- endmacro %}

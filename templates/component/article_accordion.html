@@ -1,0 +1,30 @@
+{% macro article_accordion(display, articles, toggle_style, expand=true, key=false) -%}
+  {% from "component/article_oneline.html" import article_oneline %}
+  {% if not key %}
+    {% set key = display %}
+  {% endif %}
+  <section class="accordion-item my-2">
+    <header class="mb-2 text-2xl">
+      <button
+        class="accordion-toggle {{ toggle_style }} flex w-full justify-between"
+        aria-controls="{{ key }}"
+        aria-expanded="{{ 'true' if expand else 'false' }}">
+        <div class="flex">
+          <span class="mr-2">{{ display }}</span>
+          <span class="text-gray-500">({{ articles|count }})</span>
+        </div>
+        <div
+          class="accordion-icon text-gray-500"
+          data-expanded="▲"
+          data-collapsed="▼"></div>
+      </button>
+    </header>
+    <div id="{{ key }}" class="accordion-body">
+      <ul>
+        {% for article in articles %}
+          <div class="my-1">{{ article_oneline(article) }}</div>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{%- endmacro %}

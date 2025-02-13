@@ -1,0 +1,22 @@
+{% from "component/badge.html" import category_badge, tag_badge %}
+{% macro article_card(article, site) -%}
+  <article
+    class="my-4 border-2 border-gray-500 px-4 py-2 shadow shadow-gray-300">
+    <header class="border-b-1 border-gray-300 pb-2">
+      <a href="{{ site.site_url }}/{{ article.url }}">
+        <h1 class="text-2xl">{{ article.title }}</h1>
+      </a>
+      <div class="text-sm text-gray-600">
+        posted in {{ category_badge(article.category, site) }} at
+        <time datetime="{{ article.date.isoformat() }}">
+          {{ article.locale_date }}
+        </time>
+      </div>
+      <div class="text-sm text-gray-600">
+        tags:
+        {% for tag in article.tags %}{{ tag_badge(tag, site) }}{% endfor %}
+      </div>
+    </header>
+    <p>{{ article.summary }}</p>
+  </article>
+{%- endmacro %}

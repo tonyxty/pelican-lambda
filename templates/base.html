@@ -1,0 +1,82 @@
+{% set SITE = {'site_url': SITEURL, 'categories_url': CATEGORIES_URL, 'tags_url': TAGS_URL } %}
+<!doctype html>
+<html lang="{{ DEFAULT_LANG }}" class="scrollbar-gutter-stable">
+  <head>
+    <title>{{ SITENAME }} - {% block title required %}{% endblock %}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ SITEURL }}/theme/style.css"
+      media="screen" />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet" />
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body class="font-sans">
+    <nav
+      class="sticky flex justify-between bg-gradient-to-b from-white to-gray-200 px-4 py-1.5 shadow-sm">
+      <div id="shell-line" class="font-mono text-2xl">
+        <span><a href="{{ SITEURL }}/">λ</a></span>
+        <span id="nav-path" class="text-cyan-500">
+          {% block nav_path required %}{% endblock %}
+        </span>
+        <span class="text-gray-500">&gt;</span>
+        <span
+          id="nav-command"
+          class="{{ 'text-green-500' if nav_success|d(true) else 'text-red-500' }}">
+          {% block nav_command %}{% endblock %}
+        </span>
+      </div>
+      <div>
+        {% from "component/nav.html" import nav_button %}
+        <ul class="flex">
+          {% set links = [('index', '', 'home'), ('categories', CATEGORIES_URL, 'categories'), ('tags', TAGS_URL, 'tags'), ('archives', ARCHIVES_URL, 'all posts')] %}
+          {% for name, url, display in links %}
+            {{ nav_button(url, display, page_name is defined and page_name == name, SITE) }}
+          {% endfor %}
+          {% if DISPLAY_PAGES_ON_MENU %}
+            {% for p in pages %}
+              {{ nav_button(p.url, p.title, page is defined and page == p, SITE) }}
+            {% endfor %}
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <div class="flex">
+      <main class="my-6 mr-8 ml-20 flex-auto">
+        <header class="border-b-2 pb-4">
+          <h1 class="font-serif text-6xl">
+            {% block page_title %}{% endblock %}
+          </h1>
+        </header>
+        {% block content required %}
+        {% endblock %}
+      </main>
+      <aside class="mr-20 w-36 flex-none max-md:hidden">
+        {% block sidebar %}
+        {% endblock %}
+      </aside>
+    </div>
+    <footer class="mt-8 flex justify-center gap-8">
+      <span>Copyright &copy; {{ AUTHOR }}</span>
+      <span>
+        Powered by
+        <a href="http://getpelican.com/" class="text-blue-500">Pelican</a>
+      </span>
+      <span>
+        Theme by
+        <a
+          href="https://github.com/tonyxty/pelican-lambda"
+          class="text-blue-500">
+          pelican-lambda
+        </a>
+      </span>
+    </footer>
+  </body>
+</html>

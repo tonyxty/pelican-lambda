@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Tags{% endblock %}
+
+{% block extra_head %}
+  <script src="{{ SITEURL }}/theme/accordion.js" defer></script>
+{% endblock %}
+
+{% block nav_path %}/{% endblock %}
+{% block nav_command %}tags{% endblock %}
+{% block page_title %}Tags{% endblock %}
+
+{% block content %}
+  <div class="accordion">
+    {% from "component/article_accordion.html" import article_accordion %}
+    {% for tag, articles in tags %}
+      {{ article_accordion(tag, articles|sort(attribute='date', reverse=true), 'bg-gray-100', expand=false, key=tag.slug) }}
+    {% endfor %}
+  </div>
+{% endblock content %}

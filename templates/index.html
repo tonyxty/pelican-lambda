@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+{% block nav_path %}/{% endblock %}
+{% block page_title %}Recent posts{% endblock %}
+
+{% block content %}
+  {% from "component/article_card.html" import article_card %}
+  {% for article in articles[:RECENT_ARTICLES_COUNT|d(5)] %}
+    {{ article_card(article, SITE) }}
+  {% endfor %}
+{% endblock content %}
