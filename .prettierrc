@@ -8,6 +8,6 @@
       }
     }
   ],
-  "htmlWhitespaceSensitivity": "ignore",
+  "htmlWhitespaceSensitivity": "strict",
   "bracketSameLine": true
 }

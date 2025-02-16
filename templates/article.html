@@ -7,11 +7,9 @@
   <meta name="keywords" content="{{ keywords|join(',') }}" />
 {% endblock %}
 {% block nav_path %}
-  /
-  <a href="{{ SITEURL }}/{{ CATEGORIES_URL }}#{{ article.category }}">
-    {{ article.category }}
-  </a>
-  /{{ article.slug }}
+  /<a href="{{ SITEURL }}/{{ CATEGORIES_URL }}#{{ article.category }}"
+    >{{ article.category }}</a
+  >/{{ article.slug }}
 {% endblock %}
 {% block page_title %}{{ article.title }}{% endblock %}
 
